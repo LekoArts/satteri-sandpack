@@ -2,14 +2,14 @@
 
 Author [Sandpack](https://sandpack.codesandbox.io/docs) files as fenced code blocks in MDX compiled by [Sätteri](https://github.com/bruits/satteri).
 
-`@lekoarts/satteri-sandpack` is a native, synchronous Sätteri MDAST plugin. It is not a remark/unified plugin and does not require a remark compatibility layer.
+`@lekoarts/satteri-sandpack` is a native, synchronous Sätteri MDAST plugin.
 
 ## Installation
 
-This package is ESM only and requires Node.js 22 or newer. It supports Sätteri `>=0.10.5` within the package's `^0.10.5` peer range.
+This package is ESM only and requires Node.js 22 or newer. It supports Sätteri `>=0.10.5`.
 
 ```shell
-pnpm add @lekoarts/satteri-sandpack satteri
+npm install @lekoarts/satteri-sandpack satteri
 ```
 
 Install and render a Sandpack component separately, such as `@codesandbox/sandpack-react`. This plugin only creates the component's `files` prop during MDX compilation.
@@ -107,10 +107,10 @@ console.log('Hello World')
 
 The filename may be followed by any of these boolean Sandpack file flags:
 
-- `active` — forwards `active: true`
-- `hidden` — forwards `hidden: true`
-- `readOnly` — forwards `readOnly: true`
-- `showReadOnly` — forwards `showReadOnly: true`, commonly alongside `readOnly`
+- `active`: forwards `active: true`
+- `hidden`: forwards `hidden: true`
+- `readOnly`: forwards `readOnly: true`
+- `showReadOnly`: forwards `showReadOnly: true`, commonly alongside `readOnly`
 
 Flags may appear in any order and are included only when present. Code blocks nested more deeply inside the matching MDX flow component are collected recursively.
 
@@ -159,17 +159,3 @@ interface Options {
 	componentName?: Array<string>
 }
 ```
-
-## Development
-
-```shell
-pnpm install
-pnpm test
-pnpm typecheck
-pnpm lint
-pnpm build
-pnpm --dir examples/vite-react build
-pnpm check
-```
-
-The repository uses Changesets for releases. No changeset is included while preparing the initial unpublished `1.0.0` release; adding one now would incorrectly schedule a subsequent version bump.
