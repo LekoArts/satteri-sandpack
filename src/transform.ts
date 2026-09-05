@@ -1,5 +1,6 @@
 import type { SatteriSandpackOptions } from './types'
 import { defineMdastPlugin } from 'satteri'
+import { transformSandpackNode } from './node'
 
 export default function satteriSandpack(options?: Readonly<SatteriSandpackOptions>) {
 	const componentName = options?.componentName ?? ['Sandpack']
@@ -9,6 +10,8 @@ export default function satteriSandpack(options?: Readonly<SatteriSandpackOption
 		mdxJsxFlowElement(node) {
 			if (!node.name || !componentName.includes(node.name))
 				return null
+
+			return transformSandpackNode(node)
 		},
 	})
 }
