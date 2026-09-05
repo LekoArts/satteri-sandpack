@@ -1,4 +1,4 @@
-# satteri-sandpack
+# sätteri-sandpack
 
 Author [Sandpack](https://sandpack.codesandbox.io/docs) files as fenced code blocks in MDX compiled by [Sätteri](https://github.com/bruits/satteri).
 

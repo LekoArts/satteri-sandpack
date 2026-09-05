@@ -6,13 +6,13 @@
 	"description": "Author Sandpack examples in MDX with Sätteri",
 	"author": "LekoArts",
 	"license": "MIT",
-	"homepage": "https://github.com/LekoArts/satteri-sandpack#readme",
+	"homepage": "https://github.com/LekoArts/sätteri-sandpack#readme",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/LekoArts/satteri-sandpack.git"
+		"url": "git+https://github.com/LekoArts/sätteri-sandpack.git"
 	},
 	"bugs": {
-		"url": "https://github.com/LekoArts/satteri-sandpack/issues"
+		"url": "https://github.com/LekoArts/sätteri-sandpack/issues"
 	},
 	"keywords": [
 		"satteri",
