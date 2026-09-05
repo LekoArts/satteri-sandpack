@@ -1,0 +1,75 @@
+{
+	"name": "@lekoarts/satteri-sandpack",
+	"type": "module",
+	"version": "1.0.0",
+	"packageManager": "pnpm@11.5.0",
+	"description": "Author Sandpack examples in MDX with Sätteri",
+	"author": "LekoArts",
+	"license": "MIT",
+	"homepage": "https://github.com/LekoArts/satteri-sandpack#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/LekoArts/satteri-sandpack.git"
+	},
+	"bugs": {
+		"url": "https://github.com/LekoArts/satteri-sandpack/issues"
+	},
+	"keywords": [
+		"satteri",
+		"sandpack",
+		"MDX"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"sideEffects": false,
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"default": "./dist/index.js"
+		},
+		"./package.json": "./package.json"
+	},
+	"main": "./dist/index.js",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"engines": {
+		"node": ">=22"
+	},
+	"scripts": {
+		"lint": "eslint",
+		"lint:fix": "eslint --fix",
+		"build": "tsdown",
+		"dev": "tsdown --watch",
+		"test": "vitest run",
+		"test:watch": "vitest watch",
+		"typecheck": "tsc --noEmit",
+		"changeset": "changeset",
+		"version": "changeset version",
+		"version:ci": "changeset version && pnpm install --lockfile-only",
+		"release": "pnpm build && changeset publish",
+		"check": "publint && attw --pack . --profile esm-only"
+	},
+	"peerDependencies": {
+		"satteri": "^0.10.5"
+	},
+	"devDependencies": {
+		"@antfu/eslint-config": "^9.0.0",
+		"@arethetypeswrong/cli": "^0.18.5",
+		"@changesets/changelog-github": "^1.0.1",
+		"@changesets/cli": "^3.0.2",
+		"@types/node": "^24.13.3",
+		"eslint": "^10.10.0",
+		"eslint-plugin-format": "^2.0.1",
+		"playwright": "^1.63.0",
+		"publint": "^0.3.24",
+		"satteri": "^0.10.5",
+		"tsdown": "^0.23.0",
+		"typescript": "^6.0.3",
+		"vitest": "^5.0.0"
+	}
+}

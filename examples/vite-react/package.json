@@ -1,0 +1,25 @@
+{
+	"name": "satteri-sandpack-vite-react-example",
+	"type": "module",
+	"private": true,
+	"packageManager": "pnpm@11.5.0",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc --noEmit && vite build",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"@codesandbox/sandpack-react": "^2.20.0",
+		"@lekoarts/satteri-sandpack": "workspace:*",
+		"react": "^19.2.8",
+		"react-dom": "^19.2.8",
+		"satteri": "^0.10.5"
+	},
+	"devDependencies": {
+		"@types/react": "^19.2.18",
+		"@types/react-dom": "^19.2.5",
+		"@vitejs/plugin-react": "^6.1.1",
+		"vite": "^8.2.2",
+		"vite-plugin-satteri": "^0.3.5"
+	}
+}
