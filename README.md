@@ -1,6 +1,6 @@
 # satteri-sandpack
 
-Author [Sandpack](https://sandpack.codesandbox.io/docs) files as fenced code blocks in MDX compiled by [Sätteri](https://github.com/withastro/satteri).
+Author [Sandpack](https://sandpack.codesandbox.io/docs) files as fenced code blocks in MDX compiled by [Sätteri](https://github.com/bruits/satteri).
 
 `@lekoarts/satteri-sandpack` is a native, synchronous Sätteri MDAST plugin. It is not a remark/unified plugin and does not require a remark compatibility layer.
 
