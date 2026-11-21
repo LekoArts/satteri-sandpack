@@ -21,6 +21,34 @@ function compile(name: string, options?: Options): string {
 	return result.code.replace(/\s+/g, ' ')
 }
 
+/** Evaluates a fixture and returns the props each `<Sandpack>` received at runtime. */
+function render(name: string): Array<Record<string, unknown>> {
+	const received: Array<Record<string, unknown>> = []
+	const jsx = (type: unknown, props: unknown): unknown => typeof type === 'function'
+		? type(props)
+		: null
+	const result = evaluate(fixture(name), {
+		Fragment: Symbol('Fragment'),
+		jsx,
+		jsxs: jsx,
+		mdastPlugins: [
+			publicExports.default(),
+		],
+	})
+
+	if (result instanceof Promise)
+		throw new TypeError('Expected synchronous evaluation')
+
+	const Content = result.default as (props: { components: Record<string, unknown> }) => unknown
+	Content({
+		components: {
+			Sandpack: (props: Record<string, unknown>) => received.push(props),
+		},
+	})
+
+	return received
+}
+
 describe('satteriSandpack', () => {
 	it('exports only the default runtime API', () => {
 		expect(Object.keys(publicExports).sort()).toEqual(['default'])
@@ -38,17 +66,28 @@ describe('satteriSandpack', () => {
 		expect(plugin.mdxJsxFlowElement).toBeTypeOf('function')
 	})
 
-	it('transforms the default component with every supported file option', () => {
-		const code = compile('standard.mdx')
+	it('gives each file exactly the options from its own metadata', () => {
+		const [props] = render('standard.mdx')
 
-		expect(code).toContain('template: "react"')
-		expect(code).toContain('files: { "App.js": {')
-		expect(code).toContain('"active": true')
-		expect(code).toContain('"hidden": true')
-		expect(code).toContain('"readOnly": true')
-		expect(code).toContain('"showReadOnly": true')
-		expect(code).toContain('children:')
-		expect(code).toContain('Hello World')
+		expect(props?.template).toBe('react')
+		expect(props?.files).toEqual({
+			'App.js': {
+				code: 'export default function App() {\n  return <h1>Hello World</h1>\n}',
+				active: true,
+			},
+			'hidden.js': {
+				code: 'export const hidden = true',
+				hidden: true,
+			},
+			'constants.js': {
+				code: 'export const NAME = \'World\'',
+				readOnly: true,
+			},
+			'readonly.js': {
+				code: 'export const visible = true',
+				showReadOnly: true,
+			},
+		})
 	})
 
 	it('supports a custom component name', () => {
@@ -103,37 +142,17 @@ describe('satteriSandpack', () => {
 		expect(compile('empty.mdx')).toContain('files: {}')
 	})
 
-	it('leaves unmatched components unchanged', () => {
+	it('ignores ordinary code blocks outside matching components', () => {
 		const code = compile('unmatched.mdx')
 
 		expect(code).toContain('const { NotSandpack } = _components;')
 		expect(code).not.toContain('files:')
 		expect(code).toContain('ignored = true')
+		expect(code).toContain('plain = true')
 	})
 
 	it('passes code verbatim to the component at runtime', () => {
-		const received: Array<Record<string, unknown>> = []
-		const jsx = (type: unknown, props: unknown): unknown => typeof type === 'function'
-			? type(props)
-			: null
-		const result = evaluate(fixture('special-characters.mdx'), {
-			Fragment: Symbol('Fragment'),
-			jsx,
-			jsxs: jsx,
-			mdastPlugins: [
-				publicExports.default(),
-			],
-		})
-
-		if (result instanceof Promise)
-			throw new TypeError('Expected synchronous evaluation')
-
-		const Content = result.default as (props: { components: Record<string, unknown> }) => unknown
-		Content({
-			components: {
-				Sandpack: (props: Record<string, unknown>) => received.push(props),
-			},
-		})
+		const received = render('special-characters.mdx')
 
 		expect(received).toHaveLength(1)
 		expect(received[0]?.template).toBe('vanilla')

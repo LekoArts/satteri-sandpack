@@ -23,6 +23,10 @@ export function resolveCodeMeta(codeNode: CodeNode): CodeMeta {
 	if (!meta.name)
 		throw new Error(ERRORS.MISSING_NAME)
 
+	// Assigning or emitting "__proto__" in an object literal sets the prototype instead of a file
+	if (meta.name === '__proto__')
+		throw new Error(ERRORS.RESERVED_NAME)
+
 	return meta as CodeMeta
 }
 

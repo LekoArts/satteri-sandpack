@@ -26,6 +26,10 @@ describe('resolveCodeMeta', () => {
 		expect(() => resolveCodeMeta(code('name=test.js invalid'))).toThrow(ERRORS.INVALID_META('invalid'))
 	})
 
+	it('rejects "__proto__" so the file is not silently dropped', () => {
+		expect(() => resolveCodeMeta(code('name=__proto__'))).toThrow(ERRORS.RESERVED_NAME)
+	})
+
 	it('parses a name without options', () => {
 		expect(resolveCodeMeta(code('name=test.js'))).toEqual({ name: 'test.js' })
 	})
