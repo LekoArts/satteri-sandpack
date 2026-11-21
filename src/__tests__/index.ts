@@ -1,7 +1,7 @@
 import type { MdastPluginDefinition } from 'satteri'
 import type { Options } from '../index'
 import { readFileSync } from 'node:fs'
-import { mdxToJs } from 'satteri'
+import { evaluate, mdxToJs } from 'satteri'
 import { describe, expect, it } from 'vitest'
 import * as publicExports from '../index'
 import { ERRORS } from '../utils'
@@ -105,6 +105,43 @@ describe('satteriSandpack', () => {
 		expect(code).toContain('const { NotSandpack } = _components;')
 		expect(code).not.toContain('files:')
 		expect(code).toContain('ignored = true')
+	})
+
+	it('passes code verbatim to the component at runtime', () => {
+		const received: Array<Record<string, unknown>> = []
+		const jsx = (type: unknown, props: unknown): unknown => typeof type === 'function' ? type(props) : null
+		const result = evaluate(fixture('special-characters.mdx'), {
+			Fragment: Symbol('Fragment'),
+			jsx,
+			jsxs: jsx,
+			mdastPlugins: [publicExports.default()],
+		})
+
+		if (result instanceof Promise)
+			throw new TypeError('Expected synchronous evaluation')
+
+		const Content = result.default as (props: { components: Record<string, unknown> }) => unknown
+		Content({ components: { Sandpack: (props: Record<string, unknown>) => received.push(props) } })
+
+		expect(received).toHaveLength(1)
+		expect(received[0]?.template).toBe('vanilla')
+		expect(received[0]?.files).toEqual({
+			'index.js': {
+				code: [
+					'const name = "Sätteri ✨"',
+					// eslint-disable-next-line no-template-curly-in-string -- authored code contains a template literal
+					'const greeting = `Hello ${name}, it\'s {not} an expression`',
+					'const pattern = /\\d+\\.\\s*\\\\n/g',
+					'',
+					'document.body.innerHTML = \'<script>alert(1)</script>\' + greeting',
+				].join('\n'),
+				active: true,
+			},
+			'styles.css': {
+				code: 'body::after { content: "\\201C quoted \\201D"; }',
+				hidden: true,
+			},
+		})
 	})
 
 	it('throws malformed metadata errors through mdxToJs', () => {
