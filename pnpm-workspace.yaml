@@ -3,6 +3,7 @@ trustPolicy: no-downgrade
 shellEmulator: true
 
 packages:
+  - .
   - 'examples/*'
 
 allowBuilds:

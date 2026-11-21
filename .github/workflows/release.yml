@@ -31,3 +31,6 @@ jobs:
           pr-title: 'Changesets: Version Packages'
           publish-script: pnpm release
           version-script: pnpm version:ci
+        env:
+          # Read by @changesets/changelog-github in the version script; must match github-token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
