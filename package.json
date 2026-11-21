@@ -1,7 +1,7 @@
 {
 	"name": "@lekoarts/satteri-sandpack",
 	"type": "module",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"packageManager": "pnpm@12.22.0",
 	"description": "Author Sandpack examples in MDX with Sätteri",
 	"author": "LekoArts",
