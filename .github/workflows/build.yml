@@ -22,5 +22,7 @@ jobs:
         run: pnpm lint
       - name: Build
         run: pnpm build
+      - name: Build example
+        run: pnpm --filter satteri-sandpack-vite-react-example build
       - name: Run package checks
         run: pnpm check

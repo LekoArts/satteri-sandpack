@@ -1,0 +1,15 @@
+<Sandpack template="vanilla">
+
+```js name=index.js active
+const name = "Sätteri ✨"
+const greeting = `Hello ${name}, it's {not} an expression`
+const pattern = /\d+\.\s*\\n/g
+
+document.body.innerHTML = '<script>alert(1)</script>' + greeting
+```
+
+```css name=styles.css hidden
+body::after { content: "\201C quoted \201D"; }
+```
+
+</Sandpack>

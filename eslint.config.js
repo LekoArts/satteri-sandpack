@@ -19,16 +19,22 @@ export default antfu({
 	],
 }, {
 	rules: {
-		'ts/no-restricted-types': ['error', {
-			types: {
-				'{}': {
-					fixWith: 'Record<string, unknown>',
-				},
-				'object': {
-					fixWith: 'Record<string, unknown>',
+		'ts/no-restricted-types': [
+			'error',
+			{
+				types: {
+					'{}': {
+						fixWith: 'Record<string, unknown>',
+					},
+					'object': {
+						fixWith: 'Record<string, unknown>',
+					},
 				},
 			},
-		}],
-		'ts/array-type': ['error', { default: 'generic' }],
+		],
+		'ts/array-type': [
+			'error',
+			{ default: 'generic' },
+		],
 	},
 })
