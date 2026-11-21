@@ -15,4 +15,5 @@ export const ERRORS = {
 	EMPTY_META: 'Code blocks inside <Sandpack> components cannot have empty metadata. Be sure to provide a file name.',
 	INVALID_META: (attr: string) => `Invalid meta attribute "${attr}" found in a code block inside <Sandpack> component. Be sure to use one of these valid attributes: ${CODE_META_OPTIONS.join(', ')}.`,
 	MISSING_NAME: 'Code blocks inside <Sandpack> components must have a "name" attribute in their metadata.',
+	RESERVED_NAME: 'Code blocks inside <Sandpack> components cannot use "__proto__" as a file name.',
 }

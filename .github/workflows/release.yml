@@ -12,11 +12,7 @@ jobs:
     permissions:
       contents: write
       id-token: write
-      packages: write
       pull-requests: write
-      issues: read
-      statuses: write
-      checks: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7

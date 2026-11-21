@@ -125,6 +125,7 @@ Invalid metadata throws during compilation:
 - missing metadata: code blocks cannot have empty metadata
 - missing or empty `name=...`: code blocks must have a `name` attribute
 - unknown tokens: only `active`, `hidden`, `readOnly`, and `showReadOnly` are accepted after the filename
+- `name=__proto__`: reserved, because it would set the object's prototype instead of adding a file
 
 ## Configuration
 
