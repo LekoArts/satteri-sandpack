@@ -1,5 +1,11 @@
 # @lekoarts/satteri-sandpack
 
+## 1.1.1
+
+### Patch Changes
+
+- [#5](https://github.com/LekoArts/satteri-sandpack/pull/5) [`3a40f35`](https://github.com/LekoArts/satteri-sandpack/commit/3a40f35cc786d7873941eaa09d8c878175018c6d) Thanks [@LekoArts](https://github.com/LekoArts)! - Throw a clear error for a code block named `__proto__` instead of silently dropping the file.
+
 ## 1.1.0
 
 ### Minor Changes
