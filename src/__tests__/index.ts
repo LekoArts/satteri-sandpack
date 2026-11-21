@@ -12,7 +12,9 @@ function fixture(name: string): string {
 
 function compile(name: string, options?: Options): string {
 	const result = mdxToJs(fixture(name), {
-		mdastPlugins: [publicExports.default(options)],
+		mdastPlugins: [
+			publicExports.default(options),
+		],
 	})
 
 	expect(result).not.toBeInstanceOf(Promise)
@@ -50,7 +52,9 @@ describe('satteriSandpack', () => {
 	})
 
 	it('supports a custom component name', () => {
-		const code = compile('custom-component.mdx', { componentName: ['Playground'] })
+		const code = compile('custom-component.mdx', {
+			componentName: ['Playground'],
+		})
 
 		expect(code).toContain('const { Playground } = _components;')
 		expect(code).toContain('files: { "App.js": {')
@@ -109,19 +113,27 @@ describe('satteriSandpack', () => {
 
 	it('passes code verbatim to the component at runtime', () => {
 		const received: Array<Record<string, unknown>> = []
-		const jsx = (type: unknown, props: unknown): unknown => typeof type === 'function' ? type(props) : null
+		const jsx = (type: unknown, props: unknown): unknown => typeof type === 'function'
+			? type(props)
+			: null
 		const result = evaluate(fixture('special-characters.mdx'), {
 			Fragment: Symbol('Fragment'),
 			jsx,
 			jsxs: jsx,
-			mdastPlugins: [publicExports.default()],
+			mdastPlugins: [
+				publicExports.default(),
+			],
 		})
 
 		if (result instanceof Promise)
 			throw new TypeError('Expected synchronous evaluation')
 
 		const Content = result.default as (props: { components: Record<string, unknown> }) => unknown
-		Content({ components: { Sandpack: (props: Record<string, unknown>) => received.push(props) } })
+		Content({
+			components: {
+				Sandpack: (props: Record<string, unknown>) => received.push(props),
+			},
+		})
 
 		expect(received).toHaveLength(1)
 		expect(received[0]?.template).toBe('vanilla')
@@ -146,7 +158,9 @@ describe('satteriSandpack', () => {
 
 	it('throws malformed metadata errors through mdxToJs', () => {
 		expect(() => mdxToJs('<Sandpack>\n\n```js active\ncode\n```\n\n</Sandpack>', {
-			mdastPlugins: [publicExports.default()],
+			mdastPlugins: [
+				publicExports.default(),
+			],
 		})).toThrow(ERRORS.MISSING_NAME)
 	})
 })

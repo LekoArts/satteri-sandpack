@@ -7,7 +7,11 @@ export default defineConfig({
 	plugins: [
 		react(),
 		satteri({
-			mdastPlugins: [satteriSandpack({ componentName: ['Playground'] })],
+			mdastPlugins: [
+				satteriSandpack({
+					componentName: ['Playground'],
+				}),
+			],
 		}),
 	],
 })

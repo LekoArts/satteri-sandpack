@@ -1,6 +1,11 @@
 import type { CodeMetaOptions } from './types'
 
-export const CODE_META_OPTIONS = ['active', 'hidden', 'readOnly', 'showReadOnly'] as const
+export const CODE_META_OPTIONS = [
+	'active',
+	'hidden',
+	'readOnly',
+	'showReadOnly',
+] as const
 
 export function isCodeMetaOption(key: string): key is CodeMetaOptions {
 	return CODE_META_OPTIONS.includes(key as CodeMetaOptions)

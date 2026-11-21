@@ -25,11 +25,9 @@ jobs:
       - name: Install dependencies
         uses: ./.github/actions/pnpm-install
       - name: Create release pull request or publish to npm
-        uses: changesets/action@v1
+        uses: changesets/action@v2
         with:
-          commit: 'chore(release): Publish'
-          title: 'Changesets: Version Packages'
-          publish: pnpm release
-          version: pnpm version:ci
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'chore(release): Publish'
+          pr-title: 'Changesets: Version Packages'
+          publish-script: pnpm release
+          version-script: pnpm version:ci

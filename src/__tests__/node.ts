@@ -79,7 +79,9 @@ describe('sandpack node transformation', () => {
 			type: 'mdxJsxFlowElement',
 			name: 'Sandpack',
 			attributes: [originalAttribute],
-			children: [code('name=App.js showReadOnly', 'export default 1')],
+			children: [
+				code('name=App.js showReadOnly', 'export default 1'),
+			],
 			data: { retained: true },
 			position: {
 				start: { line: 1, column: 1, offset: 0 },

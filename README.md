@@ -6,7 +6,7 @@ Author [Sandpack](https://sandpack.codesandbox.io/docs) files as fenced code blo
 
 ## Installation
 
-This package is ESM only and requires Node.js 22 or newer. It supports Sätteri `>=0.10.5`.
+This package is ESM only and requires Node.js 22 or newer. It supports Sätteri `^0.10.5` and `^0.11.0`.
 
 ```shell
 npm install @lekoarts/satteri-sandpack satteri
@@ -65,7 +65,9 @@ import satteriSandpack from '@lekoarts/satteri-sandpack'
 import { mdxToJs } from 'satteri'
 
 const result = mdxToJs(source, {
-	mdastPlugins: [satteriSandpack()],
+	mdastPlugins: [
+		satteriSandpack()
+	],
 })
 
 console.log(result.code)
@@ -87,7 +89,11 @@ export default defineConfig({
 	plugins: [
 		react(),
 		satteri({
-			mdastPlugins: [satteriSandpack({ componentName: ['Playground'] })],
+			mdastPlugins: [
+				satteriSandpack({
+					componentName: ['Playground']
+				})
+			],
 		}),
 	],
 })
@@ -131,7 +137,9 @@ satteriSandpack()
 Use `componentName` for a custom component:
 
 ```js
-satteriSandpack({ componentName: ['Playground'] })
+satteriSandpack({
+	componentName: ['Playground']
+})
 ```
 
 Pass multiple names when the same document uses more than one wrapper:

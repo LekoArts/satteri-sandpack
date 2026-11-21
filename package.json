@@ -2,7 +2,7 @@
 	"name": "@lekoarts/satteri-sandpack",
 	"type": "module",
 	"version": "1.0.0",
-	"packageManager": "pnpm@11.5.0",
+	"packageManager": "pnpm@12.22.0",
 	"description": "Author Sandpack examples in MDX with Sätteri",
 	"author": "LekoArts",
 	"license": "MIT",
@@ -55,20 +55,21 @@
 		"check": "publint && attw --pack . --profile esm-only"
 	},
 	"peerDependencies": {
-		"satteri": "^0.10.5"
+		"satteri": "^0.10.5 || ^0.11.0"
 	},
 	"devDependencies": {
-		"@antfu/eslint-config": "^9.0.0",
+		"@antfu/eslint-config": "^10.0.0",
 		"@arethetypeswrong/cli": "^0.18.5",
 		"@changesets/changelog-github": "^1.0.1",
-		"@changesets/cli": "^3.0.2",
-		"@types/node": "^24.13.3",
-		"eslint": "^10.10.0",
+		"@changesets/cli": "^3.0.3",
+		"@types/node": "^26.6.6",
+		"eslint": "^10.15.0",
 		"eslint-plugin-format": "^2.0.1",
-		"publint": "^0.3.24",
-		"satteri": "^0.10.5",
-		"tsdown": "^0.23.0",
-		"typescript": "^6.0.3",
-		"vitest": "^5.0.0"
+		"publint": "^0.3.25",
+		"satteri": "^0.11.7",
+		"tsdown": "^0.23.7",
+		"typescript": "npm:@typescript/typescript6@^6.0.2",
+		"typescript-7": "npm:typescript@^7.0.2",
+		"vitest": "^5.1.1"
 	}
 }
